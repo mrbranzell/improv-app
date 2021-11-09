@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Darkest Thought Show</title>
+    <script>
+      async function postFormDataAsJson(url, formData) {
+        const fetchOptions = {
+          method: "POST",
+          cache: "no-cache",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: formData,
+        };
+        const response = await fetch(url, fetchOptions);
+
+        if (!response.ok) {
+          const errorMessage = await response.text();
+          throw new Error(errorMessage);
+        }
+        return response;
+      }
+      async function submitSuggestion() {
+        const form = document.getElementById("suggestion-form");
+        const message = document.getElementById("submit-message");
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+          return;
+        });
+
+        const formData = new FormData(form);
+        const plainFormData = Object.fromEntries(formData.entries());
+        if (plainFormData.suggestion != "") {
+          const plainFormDataWithDate = Object.assign(plainFormData, {
+            date: new Date(),
+          });
+          const formDataJsonString = JSON.stringify(plainFormDataWithDate);
+          const response = await postFormDataAsJson(
+            form.action,
+            formDataJsonString
+          );
+          if (message.classList.contains("fly-in") === false) {
+            message.classList.add("fly-in");
+          }
+          message.innerText = "Thank you for that great suggestion!";
+        } else {
+          message.innerText = "You didn't write that sweet suggestion...";
+        }
+        return;
+      }
+    </script>
+    <link rel="stylesheet" href="/static/css/index.css" />
+  </head>
+  <body>
+    <h1>Suggestion page for Darkest Thought</h1>
+    <p id="submit-message"></p>
+    <form action="/postToDB" method="POST" value="value" id="suggestion-form">
+      <div>
+        <input
+          type="text"
+          placeholder="Write your suggestion here."
+          id="suggestion-text"
+          name="suggestion"
+          required
+        />
+        <input
+          type="text"
+          placeholder="Your Name (Optional and only for show offs)."
+          id="name"
+          name="name"
+        />
+      </div>
+
+      <button type="submit" onclick="submitSuggestion()">Submit</button>
+    </form>
+  </body>
+</html>

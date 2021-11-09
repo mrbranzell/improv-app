@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Darkest Thought Admin Dashboard</title>
+    <link rel="stylesheet" href="/static/views/css/index.css" />
+  </head>
+  <body>
+    <nav class="nav">
+      <a href="/admin" class="nav-link" data-link>Dashboard</a>
+      <a href="/admin/show" class="nav-link" data-link>Show</a>
+      <a
+        href="/admin/show/suggestions"
+        class="nav-link"
+        style="display: none"
+        data-link
+        >Suggestions</a
+      >
+    </nav>
+    <div id="app"></div>
+    <script type="module" src="/static/index.js"></script>
+  </body>
+</html>
