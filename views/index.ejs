@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover">
-    <link rel="stylesheet" href="/stylesheets/pico.css">
-    <link rel="stylesheet" href="/stylesheets/style.css">
-    <title>TODO</title>
-    
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover"
+    />
+    <link rel="stylesheet" href="/stylesheets/pico.css" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <title>Darkes Thought Show</title>
+
     <style>
       /* Global CSS variables */
       :root {
@@ -17,7 +20,9 @@
       }
 
       /* Typography */
-      h2, h3, hgroup>:last-child {
+      h2,
+      h3,
+      hgroup > :last-child {
         font-weight: 200;
       }
       small {
@@ -25,26 +30,23 @@
       }
 
       /* Header */
-      
-      
-      
-      
-      
-      :root:not([data-theme=dark]), [data-theme=light] {
-          --nav-background: rgba(255, 255, 255, 0.7);
-          --nav-border: rgba(115, 130, 140, 0.2);
+
+      :root:not([data-theme="dark"]),
+      [data-theme="light"] {
+        --nav-background: rgba(255, 255, 255, 0.7);
+        --nav-border: rgba(115, 130, 140, 0.2);
       }
 
-      [data-theme=dark] {
-          --nav-background: rgba(16, 24, 30, 0.8);
-          --nav-border: rgba(115, 130, 140, 0.2);
+      [data-theme="dark"] {
+        --nav-background: rgba(16, 24, 30, 0.8);
+        --nav-border: rgba(115, 130, 140, 0.2);
       }
     </style>
   </head>
 
   <body>
     <%- include('header'); -%>
-    
+
     <div class="hero">
       <header class="container">
         <hgroup>
@@ -54,15 +56,16 @@
         <p><a href="/login" role="button">Sign in</a></p>
       </header>
     </div>
-    
+
     <main class="container">
-      
-      
       <section>
         <div class="grid">
           <div>
             <h4>Donec sit amet</h4>
-            <p>Class aptent taciti sociosqu ad litora torquent per conubia nostra.</p>
+            <p>
+              Class aptent taciti sociosqu ad litora torquent per conubia
+              nostra.
+            </p>
           </div>
           <div>
             <h4>Suspendisse potenti</h4>
@@ -70,14 +73,22 @@
           </div>
           <div>
             <h4>Nulla augue metus</h4>
-            <p>Pacilisis sed ante ut, posuere volutpat quam. Maecenas maximus blandit mi ac finibus.</p>
+            <p>
+              Pacilisis sed ante ut, posuere volutpat quam. Maecenas maximus
+              blandit mi ac finibus.
+            </p>
           </div>
         </div>
       </section>
     </main>
-    
+
     <footer class="container">
-      <small>A <a href="http://www.passportjs.org">Passport.js</a> example • <a href="https://github.com/picocss/examples/tree/master/company/">Source code</a></small>
+      <small
+        >A <a href="http://www.passportjs.org">Passport.js</a> example •
+        <a href="https://github.com/picocss/examples/tree/master/company/"
+          >Source code</a
+        ></small
+      >
     </footer>
   </body>
 </html>
