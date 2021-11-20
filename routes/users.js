@@ -38,7 +38,7 @@ router.post("/", function (req, res, next) {
             if (err) {
               return next(err);
             }
-            res.redirect("/admin");
+            res.redirect("/");
           });
         }
       );
