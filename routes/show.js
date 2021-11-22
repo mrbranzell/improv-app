@@ -13,8 +13,8 @@ router.get("/", ensureLoggedIn(), function (req, res, next) {
 
 router.post("/add", ensureLoggedIn(), function (req, res, next) {
   db.run(
-    "INSERT INTO shows (suggestion, name) VALUES (?, ?)",
-    [req.body.suggestion, req.body.name],
+    "INSERT INTO shows (suggestion, name, date, remove) VALUES (?, ?, ?, ?)",
+    [req.body.suggestion, req.body.name, req.body.date, req.body.remove],
     function (err) {
       if (err) {
         return next(err);

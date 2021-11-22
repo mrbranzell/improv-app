@@ -12,32 +12,46 @@
       return data;
     }
 
-    // Used like so
     let arr = "<%=JSON.stringify(suggestions)%>";
     let arrToObject = JSON.parse(arr.replace(/&#34;/g, '"'));
-    let randomArrToObject = shuffle(JSON.parse(arr.replace(/&#34;/g, '"')));
 
-    
-      async function createNewShow() {
-        const fetchOptions = {
-          method: "POST",
-          cache: "no-cache",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-          //TODO pass actual show
-          body: JSON.stringify(arr),
-        };
-        const response = await fetch(url, fetchOptions);
+    function toggleAddToShow(idx) {
+      let suggestionCard = document.querySelector(".cardNr" + idx);
+      let suggestionButton = suggestionCard.querySelector(".btn");
+      suggestionCard.classList.toggle("removeToggle");
+      suggestionCard.classList.contains("removeToggle")
+        ? (suggestionButton.innerText = "Add back")
+        : (suggestionButton.innerText = "Don't include");
+      arrToObject[idx].remove = !arrToObject[idx].remove;
+    }
 
-        if (!response.ok) {
-          const errorMessage = await response.text();
-          throw new Error(errorMessage);
-        }
-        return response;
+    async function createNewShow() {
+      // shuffles and filter out removed objects
+      let filteredArr = arrToObject.filter((obj) => {
+        return obj.remove === 0 || obj.remove === false;
+      });
+      let shuffledArr = shuffle(filteredArr);
+
+      // TODO change url to be dynamic
+      const url = "http://localhost:3000/shows/add";
+      const fetchOptions = {
+        method: "POST",
+        cache: "no-cache",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(shuffledArr),
+      };
+      // TODO Real URL endpoint
+      const response = await fetch(url, fetchOptions);
+
+      if (!response.ok) {
+        const errorMessage = await response.text();
+        throw new Error(errorMessage);
       }
-    
+      return response;
+    }
   </script>
   <% } %>
   <head>
@@ -90,6 +104,10 @@
       body > main {
         padding-top: calc(1rem * var(--spacing-factor-xs) + 3.5rem);
       }
+
+      .removeToggle {
+        opacity: 0.3;
+      }
     </style>
   </head>
 
@@ -97,19 +115,22 @@
     <%- include('header'); -%>
 
     <main class="container">
-      <% if(suggestions) { %>
-      <button class="btn btn-primary" onclick="createNewShow">
+      <% if(suggestions.length > 0) { %>
+      <button class="btn btn-primary" onclick="createNewShow()">
         Create new show
       </button>
-      <% suggestions.forEach(function(suggestion){ %>
-      <article>
+      <% suggestions.forEach((suggestion, index) => { %>
+      <article class="<%-`cardNr${index}`%>">
         <p><%- suggestion.suggestion %></p>
         <% if (suggestion) { %>
         <h4><%- suggestion.name %></h4>
+        <button class="btn btn-primary" onclick="toggleAddToShow(<%-index%>)">
+          Don't include
+        </button>
         <% } %>
       </article>
 
-      <% }); %>
+      <% })}; %>
     </main>
   </body>
 </html>

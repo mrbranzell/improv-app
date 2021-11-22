@@ -13,15 +13,17 @@ module.exports = function () {
     db.run(
       "CREATE TABLE IF NOT EXISTS suggestions ( \
       suggestion TEXT, \
-      name TEXT \
-      date DATE \
+      name TEXT, \
+      date DATE, \
+      remove BOOLEAN \
     )"
     );
     db.run(
       "CREATE TABLE IF NOT EXISTS shows ( \
       suggestion TEXT, \
-      name TEXT \
-      date DATE \
+      name TEXT, \
+      date DATE, \
+      remove BOOLEAN \
     )"
     );
   });

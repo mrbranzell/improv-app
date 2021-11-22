@@ -12,10 +12,9 @@ router.get("/", ensureLoggedIn(), function (req, res, next) {
 });
 
 router.post("/add", function (req, res, next) {
-  console.log(req.body.suggestion);
   db.run(
-    "INSERT INTO suggestions (suggestion, name) VALUES (?, ?)",
-    [req.body.suggestion, req.body.name],
+    "INSERT INTO suggestions (suggestion, name, date, remove) VALUES (?, ?, ?, ?)",
+    [req.body.suggestion, req.body.name, new Date(), false],
     (err) => {
       if (err) {
         return next(err.message);

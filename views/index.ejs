@@ -34,10 +34,7 @@
         const formData = new FormData(form);
         const plainFormData = Object.fromEntries(formData.entries());
         if (plainFormData.suggestion != "") {
-          const plainFormDataWithDate = Object.assign(plainFormData, {
-            date: new Date(),
-          });
-          const formDataJsonString = JSON.stringify(plainFormDataWithDate);
+          const formDataJsonString = JSON.stringify(plainFormData);
           const response = await postFormDataAsJson(
             form.action,
             formDataJsonString
